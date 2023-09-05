@@ -1,5 +1,7 @@
 package com.example.json.model;
 
+import com.example.json.constant.ProductCategory;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,7 +20,7 @@ public class Product {
     private String productName;
 
     @Column(name = "category")
-    private String category;
+    private ProductCategory category;
 
     @Column(name = "image_url")
     private String imageUrl;
@@ -55,10 +57,10 @@ public class Product {
     }
 
     public String getCategory() {
-        return category;
+        return category.name();
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
