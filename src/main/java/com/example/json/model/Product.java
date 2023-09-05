@@ -1,7 +1,9 @@
 package com.example.json.model;
 
 import com.example.json.constant.ProductCategory;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,9 +11,12 @@ import java.util.Date;
 @Entity
 @Table(name = "product")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Integer productId;
 
@@ -39,4 +44,5 @@ public class Product {
 
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
+
 }
