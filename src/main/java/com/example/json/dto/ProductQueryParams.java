@@ -13,4 +13,5 @@ public class ProductQueryParams {
 
     ProductCategory category;
     String search;
+    String sort;
 }

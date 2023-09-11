@@ -82,7 +82,13 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<Product> getProductListByCondition(ProductQueryParams productQueryParams) {
 
-        Sort sort = Sort.by(Sort.Direction.DESC, "productId");
+        Sort sort;
+
+        if(StringUtils.isEmpty(productQueryParams.getSort())){
+            sort = Sort.by(Sort.Direction.ASC, "productId");
+        }else{
+            sort = Sort.by(Sort.Direction.DESC, "productId");
+        }
         return productRepository.findAll(buildProductSearchCondition(productQueryParams), sort);
     }
 
