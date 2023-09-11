@@ -1,5 +1,7 @@
 package com.example.json.controller;
 
+import com.example.json.constant.ProductCategory;
+import com.example.json.dto.ProductQueryParams;
 import com.example.json.dto.ProductRequest;
 import com.example.json.model.Product;
 import com.example.json.service.ProductService;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class ProductController {
@@ -20,6 +23,21 @@ public class ProductController {
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId){
         Product product = productService.getProductById(productId);
 
+        return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+
+    @GetMapping("/product")
+    public ResponseEntity<List<Product>> getProductList(){
+        List<Product> product = productService.getProductList();
+
+        return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+
+    @GetMapping("/productByCondition")
+    public ResponseEntity<List<Product>> getProductListByCondition(
+            ProductQueryParams productQueryParams
+    ){
+        List<Product> product = productService.getProductListByCondition(productQueryParams);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
