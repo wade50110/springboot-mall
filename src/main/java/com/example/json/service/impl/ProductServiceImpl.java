@@ -8,9 +8,11 @@ import com.example.json.repository.ProductRepository;
 import com.example.json.service.ProductService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -22,7 +24,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService{
 
-    @Autowired
+    @Resource
     ProductRepository productRepository;
     @Override
     public Product getProductById(Integer productId) {
@@ -79,7 +81,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> getProductListByCondition(ProductQueryParams productQueryParams) {
-        return productRepository.findAll(buildProductSearchCondition(productQueryParams));
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "productId");
+        return productRepository.findAll(buildProductSearchCondition(productQueryParams), sort);
     }
 
     private Specification<Product> buildProductSearchCondition(ProductQueryParams productQueryParams) {

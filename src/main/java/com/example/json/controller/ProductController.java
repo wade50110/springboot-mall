@@ -1,6 +1,5 @@
 package com.example.json.controller;
 
-import com.example.json.constant.ProductCategory;
 import com.example.json.dto.ProductQueryParams;
 import com.example.json.dto.ProductRequest;
 import com.example.json.model.Product;
@@ -10,13 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 public class ProductController {
 
-    @Autowired
+    @Resource
     ProductService productService;
 
     @GetMapping("/product/{productId}")
