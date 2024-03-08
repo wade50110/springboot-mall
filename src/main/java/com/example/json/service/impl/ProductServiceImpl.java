@@ -7,7 +7,6 @@ import com.example.json.model.Product;
 import com.example.json.repository.ProductRepository;
 import com.example.json.service.ProductService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -28,7 +28,9 @@ public class ProductServiceImpl implements ProductService{
     ProductRepository productRepository;
     @Override
     public Product getProductById(Integer productId) {
-        return productRepository.findByProductId(productId);
+        Optional<Product> product = productRepository.findByProductId(productId);
+
+        return product.orElse(null);
     }
 
     @Override
@@ -60,6 +62,8 @@ public class ProductServiceImpl implements ProductService{
 
         Date now = new Date();
 
+        Optional<Product> findProduct = productRepository.findByProductId(productId);
+
         Product product = new Product();
         product.setProductId(productId);
         product.setProductName(productRequest.getProductName());
@@ -68,7 +72,7 @@ public class ProductServiceImpl implements ProductService{
         product.setPrice(productRequest.getPrice());
         product.setStock(productRequest.getStock());
         product.setDescription("test");
-        product.setCreateDate(productRepository.findByProductId(productId).getCreateDate());
+        product.setCreateDate(findProduct.isPresent()?findProduct.get().getCreateDate():now);
         product.setLastModifiedDate(now);
 
         return productRepository.save(product);
@@ -92,7 +96,7 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findAll(buildProductSearchCondition(productQueryParams), sort);
     }
 
-    private Specification<Product> buildProductSearchCondition(ProductQueryParams productQueryParams) {
+    private Specification<Product>          buildProductSearchCondition(ProductQueryParams productQueryParams) {
         //重写toPredicate方法
         return (Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
 

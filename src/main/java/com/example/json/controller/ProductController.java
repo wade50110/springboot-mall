@@ -4,12 +4,12 @@ import com.example.json.dto.ProductQueryParams;
 import com.example.json.dto.ProductRequest;
 import com.example.json.model.Product;
 import com.example.json.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -22,6 +22,10 @@ public class ProductController {
     @GetMapping("/product/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId){
         Product product = productService.getProductById(productId);
+
+        if(product == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
