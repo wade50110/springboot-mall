@@ -3,7 +3,7 @@ package com.example.json.service.impl;
 import com.example.json.constant.ProductCategory;
 import com.example.json.dto.ProductQueryParams;
 import com.example.json.dto.ProductRequest;
-import com.example.json.model.Product;
+import com.example.json.entity.Product;
 import com.example.json.repository.ProductRepository;
 import com.example.json.service.ProductService;
 import org.apache.commons.lang3.StringUtils;
@@ -96,7 +96,7 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findAll(buildProductSearchCondition(productQueryParams), sort);
     }
 
-    private Specification<Product>          buildProductSearchCondition(ProductQueryParams productQueryParams) {
+    private Specification<Product> buildProductSearchCondition(ProductQueryParams productQueryParams) {
         //重写toPredicate方法
         return (Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
 

@@ -1,4 +1,4 @@
-package com.example.json.model;
+package com.example.json.entity;
 
 import com.example.json.constant.ProductCategory;
 import lombok.AllArgsConstructor;
