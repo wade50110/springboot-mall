@@ -2,19 +2,20 @@ package com.example.json.controller;
 
 import com.example.json.dto.ProductQueryParams;
 import com.example.json.dto.ProductRequest;
-import com.example.json.model.Product;
+import com.example.json.entity.Product;
 import com.example.json.service.ProductService;
 import com.example.json.vo.ResponseVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Slf4j
 public class ProductController {
 
     @Resource

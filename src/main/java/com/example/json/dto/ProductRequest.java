@@ -1,7 +1,7 @@
 package com.example.json.dto;
 
 import com.example.json.constant.ProductCategory;
-import com.example.json.model.Product;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ProductRequest {
 
+    @Schema(description = "查詢分頁結果的頁數", example = "1")
     private Integer productId;
 
     @NotNull
