@@ -22,14 +22,14 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/product/{productId}")
-    public ResponseVO getProduct(@PathVariable Integer productId){
+    public ResponseEntity<ResponseVO> getProduct(@PathVariable Integer productId){
         Product product = productService.getProductById(productId);
 
         if(product == null){
-            return ResponseVO.buildFailResult("Product not found");
+            return ResponseEntity.status(404).body(ResponseVO.buildFailResult("Product not found"));
         }
 
-        return ResponseVO.buildSuccessResult(product);
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseVO.buildSuccessResult(product));
     }
 
     @GetMapping("/product")

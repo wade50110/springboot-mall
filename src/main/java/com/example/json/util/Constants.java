@@ -5,4 +5,5 @@ public final class Constants {
     private Constants() {
     }
     public static final String LOG_TRACE_ID = "traceid";
+    public static final String SERVICE_NAME = "springboot-mall";
 }

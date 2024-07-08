@@ -1,7 +1,8 @@
 package com.example.json.exception.vo;
 
-import com.tom.messagecenter.exception.ErrorMessage;
-import com.tom.messagecenter.util.ConstantsUtil;
+
+import com.example.json.exception.ErrorMessage;
+import com.example.json.util.Constants;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +26,5 @@ public final class A10002UnknownErrorVo extends BusinessExceptionVo {
   private final UUID traceId = UUID.randomUUID();
 
   @Schema(description = "錯誤來源", example = "")
-  private final String source = ConstantsUtil.SERVICE_NAME;
+  private final String source = Constants.SERVICE_NAME;
 }
