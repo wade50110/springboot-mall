@@ -93,6 +93,7 @@
         <root level="info">
             <appender-ref ref="INFO-FILE-ROLLING" />
             <appender-ref ref="ERROR-FILE-ROLLING" />
+            <appender-ref ref="STDOUT" />
         </root>
         <!--
             logger:对单个包或类添加配置

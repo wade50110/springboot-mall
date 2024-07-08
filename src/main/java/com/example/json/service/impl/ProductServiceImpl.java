@@ -103,16 +103,20 @@ public class ProductServiceImpl implements ProductService{
             String search = productQueryParams.getSearch();
             ProductCategory category = productQueryParams.getCategory();
 
+
             List<Predicate> predicateList = new ArrayList<>();
 
-            if (StringUtils.isNotEmpty(search) && StringUtils.isNotBlank(search)) {
+            if (StringUtils.isNotBlank(search)) {
                 // 本处我都转为小写，进行模糊匹配
                 predicateList.add(cb.like(cb.lower(root.get("productName").as(String.class)), "%" + search.toLowerCase() + "%"));
             }
 
-            if (category!=null && StringUtils.isNotBlank(category.name())) {
-                predicateList.add(cb.equal(root.get("category").as(String.class), category.name()));
-            }
+            Optional.of(category).ifPresent(c -> {
+                if (StringUtils.isNotBlank(c.name())) {
+                    predicateList.add(cb.equal(root.get("category").as(String.class), c.name()));
+                }
+            });
+
 
             return cb.and(predicateList.toArray(new Predicate[0]));
         };
