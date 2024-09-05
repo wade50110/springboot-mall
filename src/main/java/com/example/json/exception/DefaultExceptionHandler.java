@@ -58,6 +58,15 @@ public class DefaultExceptionHandler {
          return ResponseEntity.badRequest().body(a10001FieldErrorVo);
      }
 
+     /** 處理商業邏輯錯誤 */
+     @ExceptionHandler(BusinessException.class)
+     @ResponseStatus(HttpStatus.BAD_REQUEST)
+     public ResponseEntity<?> handleBusinessException(final BusinessException e) {
+         saveExceptionLog(e);
+         
+         return ResponseEntity.badRequest().body(e.getBusinessExceptionVo());
+     }
+
      /** 錯誤log起來 */
      private void saveExceptionLog(final Exception e) {
          StackTraceElement[] stackTraceArray = e.getStackTrace();

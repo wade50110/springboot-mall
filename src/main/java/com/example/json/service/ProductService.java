@@ -8,15 +8,15 @@ import java.util.List;
 
 public interface ProductService {
 
-    public Product getProductById(Integer productId);
+    Product getProductById(Integer productId);
 
-    public List<Product> getProductList();
+    List<Product> getProductList();
 
-    public List<Product> getProductListByCondition(ProductQueryParams productQueryParams);
+    List<Product> getProductListByCondition(ProductQueryParams productQueryParams);
 
-    public Product createProduct(ProductRequest productRequest);
+    Product createProduct(ProductRequest productRequest);
 
-    public Product updateProduct(Integer productId,ProductRequest productRequest);
+    Product updateProduct(Integer productId, ProductRequest productRequest);
 
-    public void deleteProductById(Integer productId);
+    void deleteProductById(Integer productId);
 }

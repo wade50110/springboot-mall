@@ -4,6 +4,8 @@ import com.example.json.constant.ProductCategory;
 import com.example.json.dto.ProductQueryParams;
 import com.example.json.dto.ProductRequest;
 import com.example.json.entity.Product;
+import com.example.json.exception.BusinessException;
+import com.example.json.exception.vo.A10003ProductNotFoundVo;
 import com.example.json.repository.ProductRepository;
 import com.example.json.service.ProductService;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +32,11 @@ public class ProductServiceImpl implements ProductService{
     public Product getProductById(Integer productId) {
         Optional<Product> product = productRepository.findByProductId(productId);
 
-        return product.orElse(null);
+        if (product.isEmpty()){
+            throw new BusinessException(new A10003ProductNotFoundVo());
+        };
+
+        return product.get();
     }
 
     @Override

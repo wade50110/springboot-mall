@@ -24,11 +24,6 @@ public class ProductController {
     @GetMapping("/product/{productId}")
     public ResponseEntity<ResponseVO> getProduct(@PathVariable Integer productId){
         Product product = productService.getProductById(productId);
-
-        if(product == null){
-            return ResponseEntity.status(404).body(ResponseVO.buildFailResult("Product not found"));
-        }
-
         return ResponseEntity.status(HttpStatus.OK).body(ResponseVO.buildSuccessResult(product));
     }
 
